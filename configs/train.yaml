@@ -1,0 +1,31 @@
+data:
+  processed_dir: data/processed
+  eval_dir: data/eval
+  segment_seconds: 4.0
+  sample_rate: 16000
+  epoch_size: 8000        # synthetic "epoch" length for the on-the-fly train set
+  num_workers: 4
+
+model:
+  frame_len: 512
+  frame_hop: 128
+  encoder_dim: 256
+  hidden_dim: 128
+
+train:
+  batch_size: 16
+  epochs: 60
+  lr: 0.001
+  grad_clip_norm: 5.0
+  amp: true
+  patience: 10            # early stop if val loss doesn't improve for N epochs
+  checkpoint_dir: checkpoints
+  seed: 0
+
+mlflow:
+  experiment_name: dtln-speech-enhancement
+  # local sqlite DB — MLflow 3.x's filesystem store ("./mlruns") is
+  # maintenance-mode-only now; sqlite is the supported no-server-needed option.
+  # View with: mlflow ui --backend-store-uri sqlite:///mlruns.db
+  tracking_uri: sqlite:///mlruns.db
+  run_name: null          # null -> MLflow auto-generates one

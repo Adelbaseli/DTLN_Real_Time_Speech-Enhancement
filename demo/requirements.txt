@@ -1,0 +1,7 @@
+# For Hugging Face Spaces deployment. Same lightweight, torch-free stack as
+# serving/requirements.txt, plus gradio + matplotlib for the demo UI.
+gradio>=4.0.0
+onnxruntime>=1.16.0
+scipy>=1.11.0
+numpy>=1.24.0
+matplotlib>=3.8.0

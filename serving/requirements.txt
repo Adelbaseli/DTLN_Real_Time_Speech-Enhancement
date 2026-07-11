@@ -1,0 +1,10 @@
+# Deliberately light: no torch/torchaudio/librosa. The exported ONNX graphs
+# (src/onnx_infer.py) only need onnxruntime at serving time; resampling uses
+# scipy instead of librosa to avoid pulling in numba/audioread/joblib etc.
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+python-multipart>=0.0.6
+onnxruntime>=1.16.0
+soundfile>=0.12.1
+scipy>=1.11.0
+numpy>=1.24.0

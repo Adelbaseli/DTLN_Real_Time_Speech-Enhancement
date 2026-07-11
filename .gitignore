@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# Data & experiment artifacts (large, regenerable — see README for how to rebuild)
+# (leading slash: anchor to repo root so this doesn't also match src/data/)
+/data/
+/checkpoints/
+/onnx/
+/mlruns/
+mlruns.db
+mlflow.db
+results/*.md
+!results/.gitkeep
+logs/pipeline.log
+
+# Staged copy for pushing to a Hugging Face Space (regenerable from onnx/ +
+# demo/app.py — see README's Demo section). Deployment currently on hold.
+/hf_space_bundle/
+
+# OS / editor
+.DS_Store
+.pytest_cache/

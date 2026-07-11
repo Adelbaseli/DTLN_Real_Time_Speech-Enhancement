@@ -1,0 +1,23 @@
+# Subset of the Microsoft DNS Challenge 4 fullband corpus used for this project.
+# Full corpus is ~892GB unpacked; we pull a handful of real archives (~19GB) and
+# then subsample/resample them down further in scripts/preprocess_dataset.py.
+#
+# Source: https://github.com/microsoft/DNS-Challenge (download-dns-challenge-4.sh)
+# All paths are relative to `base_url` below and are exact blob names from that
+# script, so they are known to exist.
+
+base_url: "https://dns4public.blob.core.windows.net/dns4archive/datasets_fullband"
+
+# Add more entries here (see download-dns-challenge-4.sh for the full list) if you
+# want more data/diversity once you've validated the pipeline on this subset.
+clean_speech_archives:
+  # English read speech, ~7.5GB
+  - clean_fullband/datasets_fullband.clean_fullband.read_speech_000_0.00_3.75.tar.bz2
+  # VCTK multi-speaker corpus, ~5.4GB — adds speaker/channel diversity
+  - clean_fullband/datasets_fullband.clean_fullband.vctk_wav48_silence_trimmed_000.tar.bz2
+
+noise_archives:
+  # AudioSet clips, ~6.4GB — broad everyday-noise diversity (hundreds of sound classes)
+  - noise_fullband/datasets_fullband.noise_fullband.audioset_000.tar.bz2
+
+raw_dir: "data/raw"
