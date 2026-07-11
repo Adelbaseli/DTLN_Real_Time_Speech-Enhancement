@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: dtln-speech-enhancement
+    runtime: docker
+    dockerfilePath: ./docker/Dockerfile
+    dockerContext: .
+    plan: free
+    envVars:
+      - key: ONNX_DIR
+        value: /app/onnx
+    healthCheckPath: /health
