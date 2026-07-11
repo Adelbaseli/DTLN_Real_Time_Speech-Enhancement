@@ -17,7 +17,7 @@ from pathlib import Path
 
 import soundfile as sf
 from fastapi import FastAPI, HTTPException, UploadFile
-from fastapi.responses import StreamingResponse
+from fastapi.responses import RedirectResponse, StreamingResponse
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from src.onnx_infer import StreamingEnhancer, resample_audio  # noqa: E402
@@ -35,6 +35,13 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="DTLN Real-Time Speech Enhancement", lifespan=lifespan)
+
+
+@app.get("/", include_in_schema=False)
+def root():
+    # Bare domain -> interactive API docs, so clicking the raw link (e.g. from
+    # a CV) lands somewhere useful instead of FastAPI's default 404 JSON.
+    return RedirectResponse(url="/docs")
 
 
 @app.get("/health")
