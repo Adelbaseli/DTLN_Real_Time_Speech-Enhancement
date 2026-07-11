@@ -165,6 +165,16 @@ docker build -f docker/Dockerfile -t dtln-serve .
 docker run -p 8000:8000 dtln-serve
 ```
 
+**Deployed on Render**: `render.yaml` is a Blueprint — connect this repo at
+[render.com](https://render.com) (New → Blueprint), and Render builds and
+deploys `serving/app.py` straight from `docker/Dockerfile` with no extra
+config. Note `onnx/` is checked into the repo (small, ~6MB) specifically so
+this build has the model files available; it's otherwise gitignored as a
+regenerable dev artifact. Live at:
+https://dtln-speech-enhancement.onrender.com (see `/health`, `POST /enhance`).
+Free-tier note: the instance sleeps after inactivity, so the first request
+after a while can take ~30-60s to wake up.
+
 **Gradio demo** (local):
 
 ```bash
@@ -189,5 +199,6 @@ the exact remote URL — this step needs your own Hugging Face account).
 
 ## Live demo & repo
 
-- Demo: *(add your Hugging Face Space URL here after deploying)*
-- Source: *(this repo)*
+- Demo (FastAPI, real-time ONNX inference): https://dtln-speech-enhancement.onrender.com
+  — `GET /health`, `POST /enhance` (upload a wav, get the enhanced wav back)
+- Source: https://github.com/Adelbaseli/DTLN_Real_Time_Speech-Enhancement
